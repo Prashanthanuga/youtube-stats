@@ -1,0 +1,138 @@
+<div class="container">
+
+  <h1>Tamada Media Dashboard</h1>
+
+  <hr>
+
+  <h2>Network Overview</h2>
+
+  <div *ngIf="networkSummary">
+
+    <p>
+      <strong>Total Channels:</strong>
+      {{ networkSummary.totalChannels }}
+    </p>
+
+    <p>
+      <strong>Total Subscribers:</strong>
+      {{ formatIndianNumber(networkSummary.totalSubscribers) }}
+    </p>
+
+    <p>
+      <strong>Total Views:</strong>
+      {{ formatNumber(networkSummary.totalViews) }}
+    </p>
+
+    <p>
+      <strong>Total Videos:</strong>
+      {{ networkSummary.totalVideosPublished }}
+    </p>
+
+    <p>
+      <strong>Est Monthly Views:</strong>
+      {{ networkSummary.totalEstMonthlyViewsM }} M
+    </p>
+
+    <p>
+      <strong>Monthly Revenue:</strong>
+      ₹ {{ networkSummary.totalMonthlyRevenueCr }} Cr
+    </p>
+
+    <p>
+      <strong>Average Productivity:</strong>
+      {{ networkSummary.avgProductivityScore }}/100
+    </p>
+
+    <p>
+      <strong>Highest Subscribers:</strong>
+      {{ networkSummary.highestSubscribersChannel }}
+    </p>
+
+    <p>
+      <strong>Highest Revenue:</strong>
+      {{ networkSummary.highestRevenueChannel }}
+    </p>
+
+    <p>
+      <strong>Best Productivity:</strong>
+      {{ networkSummary.bestProductivityChannel }}
+    </p>
+
+    <p>
+      <strong>Needs Attention:</strong>
+      {{ networkSummary.needsAttentionChannel }}
+    </p>
+
+  </div>
+
+  <hr>
+
+  <h2>Select Channel</h2>
+
+  <select
+      [(ngModel)]="selectedChannel"
+      (change)="onChannelSelect()">
+
+    <option value="">
+      -- Choose Channel --
+    </option>
+
+    <option
+        *ngFor="let name of channelNames"
+        [value]="name">
+
+      {{ name }}
+
+    </option>
+
+  </select>
+
+  <hr>
+
+  <div *ngIf="loading">
+
+    <p>Loading channel data...</p>
+
+  </div>
+
+  <div
+      *ngIf="selectedChannelData"
+      class="channel-card">
+
+    <h2>
+      {{ selectedChannelData.channelName }}
+    </h2>
+
+    <p>
+      <strong>Subscribers:</strong>
+      {{ formatIndianNumber(selectedChannelData.subscribers) }}
+    </p>
+
+    <p>
+      <strong>Total Views:</strong>
+      {{ formatNumber(selectedChannelData.totalViews) }}
+    </p>
+
+    <p>
+      <strong>Total Videos:</strong>
+      {{ selectedChannelData.videos }}
+    </p>
+
+    <p>
+      <strong>Monthly Views:</strong>
+      {{ selectedChannelData.monthlyViews }} M
+    </p>
+
+    <p>
+      <strong>Revenue:</strong>
+      ₹ {{ selectedChannelData.revenue }} Lakhs
+    </p>
+
+    <p>
+      <strong>Productivity Score:</strong>
+      {{ selectedChannelData.productivityScore }}/100
+    </p>
+
+  </div>
+
+</div>
